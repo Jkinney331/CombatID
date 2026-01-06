@@ -5,6 +5,7 @@ function TabIcon({ name, focused }: { name: string; focused: boolean }) {
   const icons: Record<string, string> = {
     dashboard: '🏠',
     documents: '📄',
+    notifications: '🔔',
     search: '🔍',
     profile: '👤',
   };
@@ -48,6 +49,13 @@ export default function AppLayout() {
         options={{
           title: 'Documents',
           tabBarIcon: ({ focused }) => <TabIcon name="documents" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
+        name="notifications"
+        options={{
+          title: 'Alerts',
+          tabBarIcon: ({ focused }) => <TabIcon name="notifications" focused={focused} />,
         }}
       />
       <Tabs.Screen

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, Query, UseGuards, Request } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { OrganizationsService, OrganizationType } from './organizations.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -18,7 +18,7 @@ export class OrganizationsController {
     description?: string;
     location: string;
     jurisdiction?: string;
-  }, @Request() req) {
+  }, @Request() req: { user: { userId: string } }) {
     return this.organizationsService.create({ ...data, ownerId: req.user.userId });
   }
 

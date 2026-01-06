@@ -68,8 +68,8 @@ function StatusBadge({ status }: { status: string }) {
     <span
       className={`px-3 py-1 rounded-full text-xs font-medium ${
         isApproved
-          ? "bg-green-100 text-green-800"
-          : "bg-yellow-100 text-yellow-800"
+          ? "bg-[#22c55e]/20 text-[#22c55e]"
+          : "bg-[#f59e0b]/20 text-[#f59e0b]"
       }`}
     >
       {status}
@@ -90,7 +90,7 @@ export default function EventsPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-[#111827]">Upcoming Events</h1>
+        <h1 className="text-2xl font-bold text-white">Upcoming Events</h1>
       </div>
 
       {/* Filter Tabs */}
@@ -99,8 +99,8 @@ export default function EventsPage() {
           onClick={() => setFilter("all")}
           className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
             filter === "all"
-              ? "bg-[#2563EB] text-white"
-              : "bg-white text-[#374151] border border-[#d1d5db] hover:bg-[#f9fafb]"
+              ? "bg-[#3b82f6] text-white"
+              : "bg-[#1a1a1a] text-gray-400 border border-[#2a2a2a] hover:bg-[#252525]"
           }`}
         >
           All
@@ -109,8 +109,8 @@ export default function EventsPage() {
           onClick={() => setFilter("needsApprovals")}
           className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
             filter === "needsApprovals"
-              ? "bg-[#2563EB] text-white"
-              : "bg-white text-[#374151] border border-[#d1d5db] hover:bg-[#f9fafb]"
+              ? "bg-[#3b82f6] text-white"
+              : "bg-[#1a1a1a] text-gray-400 border border-[#2a2a2a] hover:bg-[#252525]"
           }`}
         >
           Needs Approvals
@@ -119,8 +119,8 @@ export default function EventsPage() {
           onClick={() => setFilter("approved")}
           className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
             filter === "approved"
-              ? "bg-[#2563EB] text-white"
-              : "bg-white text-[#374151] border border-[#d1d5db] hover:bg-[#f9fafb]"
+              ? "bg-[#3b82f6] text-white"
+              : "bg-[#1a1a1a] text-gray-400 border border-[#2a2a2a] hover:bg-[#252525]"
           }`}
         >
           Approved
@@ -132,17 +132,17 @@ export default function EventsPage() {
         {filteredEvents.map((event) => (
           <div
             key={event.id}
-            className="bg-white rounded-xl border border-[#e5e7eb] p-6 hover:border-[#2563EB] transition-colors"
+            className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] p-6 hover:border-[#3b82f6] transition-colors"
           >
             <div className="flex justify-between items-start">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-[#f3f4f6] rounded-lg flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#252525] rounded-lg flex items-center justify-center">
                   <span className="text-2xl">🥊</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#111827] text-lg">{event.name}</h3>
-                  <p className="text-[#2563EB] font-medium">{event.event}</p>
-                  <div className="flex items-center gap-4 mt-2 text-sm text-[#6b7280]">
+                  <h3 className="font-semibold text-white text-lg">{event.name}</h3>
+                  <p className="text-[#3b82f6] font-medium">{event.event}</p>
+                  <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
                     <span>📅 {event.date}</span>
                     <span>📍 {event.location}</span>
                     <span>🥊 {event.type}</span>
@@ -152,28 +152,28 @@ export default function EventsPage() {
               <StatusBadge status={event.status} />
             </div>
 
-            <div className="mt-4 pt-4 border-t border-[#e5e7eb] flex justify-between items-center">
+            <div className="mt-4 pt-4 border-t border-[#2a2a2a] flex justify-between items-center">
               <div className="flex items-center gap-6">
                 <div>
-                  <p className="text-sm text-[#6b7280]">Total Bouts</p>
-                  <p className="font-semibold text-[#111827]">{event.bouts}</p>
+                  <p className="text-sm text-gray-500">Total Bouts</p>
+                  <p className="font-semibold text-white">{event.bouts}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-[#6b7280]">Approved</p>
-                  <p className="font-semibold text-[#111827]">
+                  <p className="text-sm text-gray-500">Approved</p>
+                  <p className="font-semibold text-white">
                     {event.approvedBouts}/{event.bouts}
                   </p>
                 </div>
-                <div className="w-32 h-2 bg-[#e5e7eb] rounded-full overflow-hidden">
+                <div className="w-32 h-2 bg-[#2a2a2a] rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#10b981] rounded-full"
+                    className="h-full bg-[#22c55e] rounded-full"
                     style={{ width: `${(event.approvedBouts / event.bouts) * 100}%` }}
                   />
                 </div>
               </div>
               <Link
                 href={`/commission/events/${event.id}`}
-                className="px-4 py-2 bg-[#2563EB] text-white font-medium rounded-lg hover:bg-[#1d4ed8] transition-colors"
+                className="px-4 py-2 bg-[#3b82f6] text-white font-medium rounded-lg hover:bg-[#2563eb] transition-colors"
               >
                 View Details
               </Link>
@@ -184,7 +184,7 @@ export default function EventsPage() {
 
       {filteredEvents.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-[#6b7280]">No events found</p>
+          <p className="text-gray-500">No events found</p>
         </div>
       )}
     </div>

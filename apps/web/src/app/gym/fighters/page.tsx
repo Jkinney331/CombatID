@@ -98,9 +98,9 @@ const fighters = [
 ];
 
 const eligibilityColors: Record<string, { bg: string; text: string }> = {
-  eligible: { bg: "bg-[#dcfce7]", text: "text-[#166534]" },
-  conditional: { bg: "bg-[#fef3c7]", text: "text-[#92400e]" },
-  incomplete: { bg: "bg-[#fee2e2]", text: "text-[#991b1b]" },
+  eligible: { bg: "bg-[#22c55e]/20", text: "text-[#22c55e]" },
+  conditional: { bg: "bg-[#f59e0b]/20", text: "text-[#f59e0b]" },
+  incomplete: { bg: "bg-[#ef4444]/20", text: "text-[#ef4444]" },
 };
 
 export default function GymFightersPage() {
@@ -125,34 +125,34 @@ export default function GymFightersPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#111827]">My Fighters</h1>
-          <p className="text-[#6b7280]">Manage fighters training at your gym</p>
+          <h1 className="text-2xl font-bold text-white">My Fighters</h1>
+          <p className="text-gray-500">Manage fighters training at your gym</p>
         </div>
-        <button className="bg-[#059669] text-white px-4 py-2 rounded-lg hover:bg-[#047857] transition-colors font-medium">
+        <button className="bg-[#ea580c] text-white px-4 py-2 rounded-lg hover:bg-[#c2410c] transition-colors font-medium">
           + Add Fighter
         </button>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl p-4 border border-[#e5e7eb]">
-          <p className="text-[#6b7280] text-sm">Total Fighters</p>
-          <p className="text-2xl font-bold text-[#111827]">{fighters.length}</p>
+        <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a]">
+          <p className="text-gray-500 text-sm">Total Fighters</p>
+          <p className="text-2xl font-bold text-white">{fighters.length}</p>
         </div>
-        <div className="bg-white rounded-xl p-4 border border-[#e5e7eb]">
-          <p className="text-[#6b7280] text-sm">Fully Eligible</p>
-          <p className="text-2xl font-bold text-[#10b981]">
+        <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a]">
+          <p className="text-gray-500 text-sm">Fully Eligible</p>
+          <p className="text-2xl font-bold text-[#22c55e]">
             {fighters.filter((f) => f.eligibility === "eligible").length}
           </p>
         </div>
-        <div className="bg-white rounded-xl p-4 border border-[#e5e7eb]">
-          <p className="text-[#6b7280] text-sm">Conditional</p>
+        <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a]">
+          <p className="text-gray-500 text-sm">Conditional</p>
           <p className="text-2xl font-bold text-[#f59e0b]">
             {fighters.filter((f) => f.eligibility === "conditional").length}
           </p>
         </div>
-        <div className="bg-white rounded-xl p-4 border border-[#e5e7eb]">
-          <p className="text-[#6b7280] text-sm">Incomplete</p>
+        <div className="bg-[#1a1a1a] rounded-xl p-4 border border-[#2a2a2a]">
+          <p className="text-gray-500 text-sm">Incomplete</p>
           <p className="text-2xl font-bold text-[#ef4444]">
             {fighters.filter((f) => f.eligibility === "incomplete").length}
           </p>
@@ -167,13 +167,13 @@ export default function GymFightersPage() {
             placeholder="Search fighters..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#059669] focus:border-transparent"
+            className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ea580c] focus:border-transparent"
           />
         </div>
         <select
           value={weightFilter}
           onChange={(e) => setWeightFilter(e.target.value)}
-          className="px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#059669] bg-white"
+          className="px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#ea580c]"
         >
           <option value="all">All Weight Classes</option>
           {weightClasses.map((wc) => (
@@ -185,7 +185,7 @@ export default function GymFightersPage() {
         <select
           value={eligibilityFilter}
           onChange={(e) => setEligibilityFilter(e.target.value)}
-          className="px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#059669] bg-white"
+          className="px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#ea580c]"
         >
           <option value="all">All Eligibility</option>
           <option value="eligible">Eligible</option>
@@ -195,35 +195,35 @@ export default function GymFightersPage() {
       </div>
 
       {/* Fighter List */}
-      <div className="bg-white rounded-xl border border-[#e5e7eb]">
+      <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] overflow-hidden">
         <table className="w-full">
-          <thead>
-            <tr className="border-b border-[#e5e7eb]">
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Fighter</th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Weight Class</th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Record</th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Eligibility</th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Documents</th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Next Fight</th>
-              <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]"></th>
+          <thead className="bg-[#151515] border-b border-[#2a2a2a]">
+            <tr>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Fighter</th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Weight Class</th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Record</th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Eligibility</th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Documents</th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Next Fight</th>
+              <th className="text-left px-4 py-3 text-sm font-medium text-gray-500"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e5e7eb]">
+          <tbody className="divide-y divide-[#2a2a2a]">
             {filteredFighters.map((fighter) => (
-              <tr key={fighter.id} className="hover:bg-[#f9fafb]">
+              <tr key={fighter.id} className="hover:bg-[#252525] transition-colors">
                 <td className="px-4 py-3">
                   <Link href={`/gym/fighters/${fighter.id}`} className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#f3f4f6] rounded-full flex items-center justify-center">
-                      <span>👤</span>
+                    <div className="w-10 h-10 bg-[#252525] rounded-full flex items-center justify-center">
+                      <span className="text-gray-400">👤</span>
                     </div>
                     <div>
-                      <p className="font-medium text-[#111827]">{fighter.name}</p>
-                      <p className="text-xs text-[#6b7280]">{fighter.combatId}</p>
+                      <p className="font-medium text-white">{fighter.name}</p>
+                      <p className="text-xs text-gray-500">{fighter.combatId}</p>
                     </div>
                   </Link>
                 </td>
-                <td className="px-4 py-3 text-sm text-[#374151]">{fighter.weightClass}</td>
-                <td className="px-4 py-3 text-sm font-medium text-[#374151]">{fighter.record}</td>
+                <td className="px-4 py-3 text-sm text-gray-400">{fighter.weightClass}</td>
+                <td className="px-4 py-3 text-sm font-medium text-white">{fighter.record}</td>
                 <td className="px-4 py-3">
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${eligibilityColors[fighter.eligibility].bg} ${eligibilityColors[fighter.eligibility].text}`}
@@ -233,11 +233,11 @@ export default function GymFightersPage() {
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-20 h-2 bg-[#e5e7eb] rounded-full overflow-hidden">
+                    <div className="w-20 h-2 bg-[#2a2a2a] rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full ${
                           fighter.documentsComplete === fighter.documentsTotal
-                            ? "bg-[#10b981]"
+                            ? "bg-[#22c55e]"
                             : "bg-[#f59e0b]"
                         }`}
                         style={{
@@ -245,25 +245,25 @@ export default function GymFightersPage() {
                         }}
                       />
                     </div>
-                    <span className="text-xs text-[#6b7280]">
+                    <span className="text-xs text-gray-500">
                       {fighter.documentsComplete}/{fighter.documentsTotal}
                     </span>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-sm text-[#374151]">
+                <td className="px-4 py-3 text-sm text-gray-400">
                   {fighter.nextFight ? (
                     <div>
-                      <p>{fighter.nextFight}</p>
-                      <p className="text-xs text-[#6b7280]">{fighter.promotion}</p>
+                      <p className="text-white">{fighter.nextFight}</p>
+                      <p className="text-xs text-gray-500">{fighter.promotion}</p>
                     </div>
                   ) : (
-                    <span className="text-[#9ca3af]">None scheduled</span>
+                    <span className="text-gray-600">None scheduled</span>
                   )}
                 </td>
                 <td className="px-4 py-3">
                   <Link
                     href={`/gym/fighters/${fighter.id}`}
-                    className="text-[#059669] hover:underline text-sm"
+                    className="text-[#ea580c] hover:underline text-sm"
                   >
                     View
                   </Link>
@@ -276,7 +276,7 @@ export default function GymFightersPage() {
 
       {filteredFighters.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-[#6b7280]">No fighters found matching your criteria</p>
+          <p className="text-gray-500">No fighters found matching your criteria</p>
         </div>
       )}
     </div>

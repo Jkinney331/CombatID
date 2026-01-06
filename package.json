@@ -5,21 +5,30 @@
   "description": "CombatID - Digital identity and compliance platform for combat sports",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "services/*"
   ],
   "scripts": {
     "dev": "turbo dev",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:api": "cd apps/api && npm run start:dev",
+    "dev:ai": "cd services/ai && uvicorn app.main:app --reload --port 8000",
     "build": "turbo build",
     "lint": "turbo lint",
     "clean": "turbo clean",
     "mobile": "cd apps/mobile && npm start",
     "web": "cd apps/web && npm run dev",
     "api": "cd apps/api && npm run start:dev",
-    "ai": "cd apps/ai-service && uvicorn main:app --reload",
-    "db:generate": "cd packages/database && npx prisma generate",
-    "db:migrate": "cd packages/database && npx prisma migrate dev",
-    "db:push": "cd packages/database && npx prisma db push",
-    "db:studio": "cd packages/database && npx prisma studio"
+    "ai": "cd services/ai && uvicorn app.main:app --reload",
+    "db:generate": "cd apps/api && npx prisma generate",
+    "db:migrate": "cd apps/api && npx prisma migrate dev",
+    "db:push": "cd apps/api && npx prisma db push",
+    "db:studio": "cd apps/api && npx prisma studio",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:reset": "docker compose down -v && docker compose up -d",
+    "setup": "./scripts/setup-dev.sh"
   },
   "devDependencies": {
     "turbo": "^2.0.0"

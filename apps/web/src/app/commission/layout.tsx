@@ -2,14 +2,48 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Chat from "@/components/Chat";
 
 const navItems = [
-  { href: "/commission", label: "Dashboard", icon: "🏠" },
-  { href: "/commission/fighters", label: "Fighters", icon: "👤" },
-  { href: "/commission/events", label: "Events", icon: "📅" },
-  { href: "/commission/rulesets", label: "Rulesets", icon: "📋" },
-  { href: "/commission/approvals", label: "Approvals", icon: "✓" },
-  { href: "/commission/settings", label: "Settings", icon: "⚙️" },
+  { href: "/commission", label: "Dashboard", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+    </svg>
+  )},
+  { href: "/commission/fighters", label: "Fighter Registry", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+  )},
+  { href: "/commission/events", label: "Events", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+  )},
+  { href: "/commission/approvals", label: "Approvals", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ), badge: 23 },
+  { href: "/commission/rulesets", label: "Rulesets", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+  )},
+];
+
+const preferenceItems = [
+  { href: "/commission/settings", label: "Settings", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  )},
+  { href: "#", label: "Help Centre", icon: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )},
 ];
 
 export default function CommissionLayout({
@@ -20,59 +54,144 @@ export default function CommissionLayout({
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-[#f9fafb]">
-      {/* Top Header */}
-      <header className="bg-[#2563EB] text-white px-6 py-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <span className="text-sm font-bold">C</span>
-              </div>
-              <div>
-                <h1 className="font-bold text-lg">CombatID</h1>
-                <p className="text-white/70 text-xs">Commission Portal</p>
-              </div>
-            </Link>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm">Nevada Athletic Commission</span>
-            <div className="w-8 h-8 bg-white/20 rounded-full" />
+    <div className="min-h-screen bg-[#0f0f0f] flex">
+      {/* Dark Sidebar - Canto Style */}
+      <aside className="w-64 bg-[#1a1a1a] border-r border-[#2a2a2a] flex flex-col min-h-screen fixed left-0 top-0">
+        {/* Logo */}
+        <div className="p-5 border-b border-[#2a2a2a]">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-sm">C</span>
+            </div>
+            <span className="font-semibold text-white text-lg">CombatID</span>
+          </Link>
+        </div>
+
+        {/* Main Menu */}
+        <nav className="flex-1 p-4">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 px-3">Main Menu</p>
+          <ul className="space-y-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href ||
+                (item.href !== "/commission" && pathname.startsWith(item.href));
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
+                      isActive
+                        ? "bg-[#3b82f6] text-white"
+                        : "text-gray-400 hover:text-white hover:bg-[#252525]"
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="font-medium text-sm">{item.label}</span>
+                    {item.badge && (
+                      <span className={`ml-auto text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-[#f59e0b]/20 text-[#f59e0b]'}`}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Preferences */}
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-4 px-3">Preference</p>
+          <ul className="space-y-1">
+            {preferenceItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
+                      isActive
+                        ? "bg-[#3b82f6] text-white"
+                        : "text-gray-400 hover:text-white hover:bg-[#252525]"
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="font-medium text-sm">{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* User Profile */}
+        <div className="p-4 border-t border-[#2a2a2a]">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+              NA
+            </div>
+            <div className="flex-1">
+              <p className="text-white text-sm font-medium">Nevada Athletic Comm.</p>
+              <p className="text-gray-500 text-xs">Las Vegas, NV</p>
+            </div>
+            <button className="text-gray-400 hover:text-white">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+              </svg>
+            </button>
           </div>
         </div>
-      </header>
+      </aside>
 
-      <div className="flex max-w-7xl mx-auto">
-        {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-[#e5e7eb] min-h-[calc(100vh-72px)]">
-          <nav className="p-4">
-            <ul className="space-y-1">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href ||
-                  (item.href !== "/commission" && pathname.startsWith(item.href));
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                        isActive
-                          ? "bg-[#2563EB] text-white"
-                          : "text-[#374151] hover:bg-[#f3f4f6]"
-                      }`}
-                    >
-                      <span>{item.icon}</span>
-                      <span className="font-medium">{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </aside>
+      {/* Main Content Area */}
+      <div className="flex-1 ml-64">
+        {/* Top Bar */}
+        <header className="bg-[#1a1a1a] border-b border-[#2a2a2a] sticky top-0 z-40">
+          <div className="px-6 py-4 flex items-center justify-between">
+            {/* Search */}
+            <div className="flex items-center gap-2 bg-[#252525] rounded-xl px-4 py-2.5 w-96">
+              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search fighters, events..."
+                className="bg-transparent text-sm text-white placeholder-gray-500 focus:outline-none flex-1"
+              />
+            </div>
+
+            {/* Right Actions */}
+            <div className="flex items-center gap-4">
+              {/* Notifications */}
+              <button className="w-10 h-10 bg-[#252525] rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-colors relative">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#ef4444] text-white text-xs font-bold rounded-full flex items-center justify-center">8</span>
+              </button>
+
+              {/* Date */}
+              <div className="flex items-center gap-2 bg-[#252525] rounded-xl px-4 py-2.5">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="text-sm text-white">Jan 6, 2026</span>
+              </div>
+
+              {/* Review Button */}
+              <button className="bg-[#3b82f6] text-white rounded-xl px-5 py-2.5 text-sm font-semibold hover:bg-[#2563eb] transition-colors flex items-center gap-2">
+                Review Queue
+                <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs">23</span>
+              </button>
+            </div>
+          </div>
+        </header>
 
         {/* Main Content */}
-        <main className="flex-1 p-6">{children}</main>
+        <main className="p-6">
+          {children}
+        </main>
       </div>
+
+      {/* Chat Widget */}
+      <Chat theme="dark" accentColor="#3b82f6" />
     </div>
   );
 }

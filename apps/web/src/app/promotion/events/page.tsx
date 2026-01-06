@@ -67,10 +67,10 @@ const events = [
 ];
 
 const statusColors: Record<string, { bg: string; text: string }> = {
-  approved: { bg: "bg-[#dcfce7]", text: "text-[#166534]" },
-  submitted: { bg: "bg-[#fef3c7]", text: "text-[#92400e]" },
-  draft: { bg: "bg-[#f3f4f6]", text: "text-[#374151]" },
-  completed: { bg: "bg-[#dbeafe]", text: "text-[#1e40af]" },
+  approved: { bg: "bg-[#22c55e]/20", text: "text-[#22c55e]" },
+  submitted: { bg: "bg-[#f59e0b]/20", text: "text-[#f59e0b]" },
+  draft: { bg: "bg-[#6b7280]/20", text: "text-[#9ca3af]" },
+  completed: { bg: "bg-[#3b82f6]/20", text: "text-[#3b82f6]" },
 };
 
 export default function EventsPage() {
@@ -93,12 +93,12 @@ export default function EventsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#111827]">Events</h1>
-          <p className="text-[#6b7280]">Manage your fight events and cards</p>
+          <h1 className="text-2xl font-bold text-white">Events</h1>
+          <p className="text-gray-500">Manage your fight events and cards</p>
         </div>
         <Link
           href="/promotion/events/new"
-          className="bg-[#7C3AED] text-white px-4 py-2 rounded-lg hover:bg-[#6d28d9] transition-colors font-medium"
+          className="bg-[#c5f82a] text-[#0f0f0f] px-4 py-2 rounded-lg hover:bg-[#d4f94d] transition-colors font-semibold"
         >
           + Create Event
         </Link>
@@ -112,13 +112,13 @@ export default function EventsPage() {
             placeholder="Search events..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED] focus:border-transparent"
+            className="w-full px-4 py-2.5 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#c5f82a] focus:border-transparent"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED] bg-white"
+          className="px-4 py-2.5 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#c5f82a]"
         >
           <option value="all">All Status</option>
           <option value="draft">Draft</option>
@@ -130,45 +130,45 @@ export default function EventsPage() {
 
       {/* Upcoming Events */}
       {upcomingEvents.length > 0 && (
-        <div className="bg-white rounded-xl border border-[#e5e7eb]">
-          <div className="p-4 border-b border-[#e5e7eb]">
-            <h2 className="font-semibold text-[#111827]">Upcoming Events</h2>
+        <div className="bg-[#1a1a1a] rounded-2xl border border-[#2a2a2a]">
+          <div className="p-4 border-b border-[#2a2a2a]">
+            <h2 className="font-semibold text-white">Upcoming Events</h2>
           </div>
-          <div className="divide-y divide-[#e5e7eb]">
+          <div className="divide-y divide-[#2a2a2a]">
             {upcomingEvents.map((event) => (
               <Link
                 key={event.id}
                 href={`/promotion/events/${event.id}`}
-                className="p-4 flex items-center justify-between hover:bg-[#f9fafb] transition-colors block"
+                className="p-4 flex items-center justify-between hover:bg-[#252525] transition-colors block"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-[#7C3AED]/10 rounded-lg flex flex-col items-center justify-center">
-                    <span className="text-xs text-[#7C3AED] font-medium">
+                  <div className="w-16 h-16 bg-[#c5f82a]/10 rounded-xl flex flex-col items-center justify-center">
+                    <span className="text-xs text-[#c5f82a] font-medium">
                       {new Date(event.date).toLocaleDateString("en-US", { month: "short" })}
                     </span>
-                    <span className="text-xl font-bold text-[#7C3AED]">
+                    <span className="text-xl font-bold text-[#c5f82a]">
                       {new Date(event.date).getDate()}
                     </span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-[#111827]">{event.name}</h3>
-                    <p className="text-sm text-[#6b7280]">
+                    <h3 className="font-medium text-white">{event.name}</h3>
+                    <p className="text-sm text-gray-500">
                       {event.venue} • {event.location}
                     </p>
-                    <p className="text-xs text-[#6b7280] mt-1">{event.commission}</p>
+                    <p className="text-xs text-gray-600 mt-1">{event.commission}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <p className="text-lg font-bold text-[#111827]">{event.bouts}</p>
-                    <p className="text-xs text-[#6b7280]">Bouts</p>
+                    <p className="text-lg font-bold text-white">{event.bouts}</p>
+                    <p className="text-xs text-gray-500">Bouts</p>
                   </div>
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[event.status].bg} ${statusColors[event.status].text}`}
                   >
                     {event.status}
                   </span>
-                  <span className="text-[#9ca3af]">→</span>
+                  <span className="text-gray-600">→</span>
                 </div>
               </Link>
             ))}
@@ -178,50 +178,50 @@ export default function EventsPage() {
 
       {/* Past Events */}
       {pastEvents.length > 0 && (
-        <div className="bg-white rounded-xl border border-[#e5e7eb]">
-          <div className="p-4 border-b border-[#e5e7eb]">
-            <h2 className="font-semibold text-[#111827]">Past Events</h2>
+        <div className="bg-[#1a1a1a] rounded-2xl border border-[#2a2a2a]">
+          <div className="p-4 border-b border-[#2a2a2a]">
+            <h2 className="font-semibold text-white">Past Events</h2>
           </div>
-          <div className="divide-y divide-[#e5e7eb]">
+          <div className="divide-y divide-[#2a2a2a]">
             {pastEvents.map((event) => (
               <Link
                 key={event.id}
                 href={`/promotion/events/${event.id}`}
-                className="p-4 flex items-center justify-between hover:bg-[#f9fafb] transition-colors block"
+                className="p-4 flex items-center justify-between hover:bg-[#252525] transition-colors block"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-[#f3f4f6] rounded-lg flex flex-col items-center justify-center">
-                    <span className="text-xs text-[#6b7280] font-medium">
+                  <div className="w-16 h-16 bg-[#252525] rounded-xl flex flex-col items-center justify-center">
+                    <span className="text-xs text-gray-500 font-medium">
                       {new Date(event.date).toLocaleDateString("en-US", { month: "short" })}
                     </span>
-                    <span className="text-xl font-bold text-[#6b7280]">
+                    <span className="text-xl font-bold text-gray-400">
                       {new Date(event.date).getDate()}
                     </span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-[#111827]">{event.name}</h3>
-                    <p className="text-sm text-[#6b7280]">
+                    <h3 className="font-medium text-white">{event.name}</h3>
+                    <p className="text-sm text-gray-500">
                       {event.venue} • {event.location}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <p className="text-lg font-bold text-[#111827]">{event.bouts}</p>
-                    <p className="text-xs text-[#6b7280]">Bouts</p>
+                    <p className="text-lg font-bold text-white">{event.bouts}</p>
+                    <p className="text-xs text-gray-500">Bouts</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-lg font-bold text-[#111827]">
+                    <p className="text-lg font-bold text-white">
                       {Math.round((event.ticketsSold / event.capacity) * 100)}%
                     </p>
-                    <p className="text-xs text-[#6b7280]">Sold</p>
+                    <p className="text-xs text-gray-500">Sold</p>
                   </div>
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[event.status].bg} ${statusColors[event.status].text}`}
                   >
                     {event.status}
                   </span>
-                  <span className="text-[#9ca3af]">→</span>
+                  <span className="text-gray-600">→</span>
                 </div>
               </Link>
             ))}

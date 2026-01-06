@@ -43,57 +43,57 @@ export default function RulesetsPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-[#111827]">Medical Requirements by Discipline</h1>
+        <h1 className="text-2xl font-bold text-white">Medical Requirements by Discipline</h1>
       </div>
 
       <div className="grid grid-cols-3 gap-6">
         {/* Discipline List */}
-        <div className="bg-white rounded-xl border border-[#e5e7eb]">
-          <div className="p-4 border-b border-[#e5e7eb]">
-            <h2 className="font-semibold text-[#111827]">Disciplines</h2>
+        <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a]">
+          <div className="p-4 border-b border-[#2a2a2a]">
+            <h2 className="font-semibold text-white">Disciplines</h2>
           </div>
-          <div className="divide-y divide-[#e5e7eb]">
+          <div className="divide-y divide-[#2a2a2a]">
             {mockRulesets.map((ruleset) => (
               <button
                 key={ruleset.id}
                 onClick={() => setSelectedRuleset(ruleset)}
                 className={`w-full p-4 text-left transition-colors ${
                   selectedRuleset.id === ruleset.id
-                    ? "bg-[#ebf5ff] border-l-4 border-[#2563EB]"
-                    : "hover:bg-[#f9fafb]"
+                    ? "bg-[#3b82f6]/10 border-l-4 border-[#3b82f6]"
+                    : "hover:bg-[#252525]"
                 }`}
               >
                 <p className={`font-medium ${
-                  selectedRuleset.id === ruleset.id ? "text-[#2563EB]" : "text-[#111827]"
+                  selectedRuleset.id === ruleset.id ? "text-[#3b82f6]" : "text-white"
                 }`}>
                   {ruleset.discipline}
                 </p>
-                <p className="text-sm text-[#6b7280]">
+                <p className="text-sm text-gray-500">
                   {ruleset.requirements.length} requirements
                 </p>
               </button>
             ))}
           </div>
           <div className="p-4">
-            <button className="w-full px-4 py-2 border border-dashed border-[#d1d5db] rounded-lg text-[#6b7280] hover:border-[#2563EB] hover:text-[#2563EB] transition-colors">
+            <button className="w-full px-4 py-2 border border-dashed border-[#3a3a3a] rounded-lg text-gray-500 hover:border-[#3b82f6] hover:text-[#3b82f6] transition-colors">
               + Add Discipline
             </button>
           </div>
         </div>
 
         {/* Requirements Detail */}
-        <div className="col-span-2 bg-white rounded-xl border border-[#e5e7eb]">
-          <div className="p-4 border-b border-[#e5e7eb] flex justify-between items-center">
+        <div className="col-span-2 bg-[#1a1a1a] rounded-xl border border-[#2a2a2a]">
+          <div className="p-4 border-b border-[#2a2a2a] flex justify-between items-center">
             <div>
-              <h2 className="font-semibold text-[#111827]">Current {selectedRuleset.discipline} Requirements</h2>
-              <p className="text-sm text-[#6b7280]">Nevada Athletic Commission</p>
+              <h2 className="font-semibold text-white">Current {selectedRuleset.discipline} Requirements</h2>
+              <p className="text-sm text-gray-500">Nevada Athletic Commission</p>
             </div>
             <button
               onClick={() => setIsEditing(!isEditing)}
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
                 isEditing
-                  ? "bg-[#10b981] text-white hover:bg-[#059669]"
-                  : "bg-[#2563EB] text-white hover:bg-[#1d4ed8]"
+                  ? "bg-[#22c55e] text-white hover:bg-[#16a34a]"
+                  : "bg-[#3b82f6] text-white hover:bg-[#2563eb]"
               }`}
             >
               {isEditing ? "Save Changes" : "Edit Requirements"}
@@ -104,31 +104,31 @@ export default function RulesetsPage() {
             {selectedRuleset.requirements.map((req, index) => (
               <div
                 key={req.id}
-                className="p-4 border border-[#e5e7eb] rounded-lg hover:border-[#2563EB] transition-colors"
+                className="p-4 border border-[#2a2a2a] rounded-lg hover:border-[#3b82f6] transition-colors"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-medium ${
-                      req.required ? "bg-[#2563EB] text-white" : "bg-[#e5e7eb] text-[#6b7280]"
+                      req.required ? "bg-[#3b82f6] text-white" : "bg-[#3a3a3a] text-gray-400"
                     }`}>
                       {index + 1}
                     </div>
                     <div>
-                      <p className="font-medium text-[#111827]">{req.name}</p>
+                      <p className="font-medium text-white">{req.name}</p>
                       {req.description && (
-                        <p className="text-sm text-[#6b7280] mt-1">{req.description}</p>
+                        <p className="text-sm text-gray-500 mt-1">{req.description}</p>
                       )}
                       <span className={`inline-block mt-2 px-2 py-0.5 rounded text-xs font-medium ${
                         req.required
-                          ? "bg-red-100 text-red-800"
-                          : "bg-gray-100 text-gray-800"
+                          ? "bg-[#ef4444]/20 text-[#ef4444]"
+                          : "bg-[#3a3a3a] text-gray-400"
                       }`}>
                         {req.required ? "Required" : "Optional"}
                       </span>
                     </div>
                   </div>
                   {isEditing && (
-                    <button className="text-red-500 hover:text-red-700">
+                    <button className="text-[#ef4444] hover:underline text-sm">
                       Remove
                     </button>
                   )}
@@ -137,14 +137,14 @@ export default function RulesetsPage() {
             ))}
 
             {isEditing && (
-              <button className="w-full p-4 border border-dashed border-[#d1d5db] rounded-lg text-[#6b7280] hover:border-[#2563EB] hover:text-[#2563EB] transition-colors">
+              <button className="w-full p-4 border border-dashed border-[#3a3a3a] rounded-lg text-gray-500 hover:border-[#3b82f6] hover:text-[#3b82f6] transition-colors">
                 + Add Requirement
               </button>
             )}
           </div>
 
-          <div className="p-4 border-t border-[#e5e7eb] bg-[#f9fafb]">
-            <p className="text-sm text-[#6b7280]">
+          <div className="p-4 border-t border-[#2a2a2a] bg-[#151515]">
+            <p className="text-sm text-gray-500">
               Last updated: January 1, 2026 • Version 2.1
             </p>
           </div>

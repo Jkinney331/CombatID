@@ -16,12 +16,12 @@ export default function CommissionSettingsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[#111827]">Settings</h1>
-        <p className="text-[#6b7280]">Manage commission settings</p>
+        <h1 className="text-2xl font-bold text-white">Settings</h1>
+        <p className="text-gray-500">Manage commission settings</p>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-[#e5e7eb]">
+      <div className="border-b border-[#2a2a2a]">
         <div className="flex gap-6">
           {[
             { id: "profile", label: "Commission Profile" },
@@ -34,8 +34,8 @@ export default function CommissionSettingsPage() {
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`pb-3 px-1 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === tab.id
-                  ? "border-[#2563EB] text-[#2563EB]"
-                  : "border-transparent text-[#6b7280] hover:text-[#111827]"
+                  ? "border-[#3b82f6] text-[#3b82f6]"
+                  : "border-transparent text-gray-500 hover:text-white"
               }`}
             >
               {tab.label}
@@ -46,87 +46,87 @@ export default function CommissionSettingsPage() {
 
       {/* Profile Tab */}
       {activeTab === "profile" && (
-        <div className="bg-white rounded-xl border border-[#e5e7eb] p-6">
-          <h3 className="font-semibold text-[#111827] mb-6">Commission Information</h3>
+        <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] p-6">
+          <h3 className="font-semibold text-white mb-6">Commission Information</h3>
           <div className="flex items-start gap-6 mb-6">
-            <div className="w-24 h-24 bg-[#2563EB]/10 rounded-xl flex items-center justify-center">
-              <span className="text-2xl font-bold text-[#2563EB]">NAC</span>
+            <div className="w-24 h-24 bg-[#3b82f6]/20 rounded-xl flex items-center justify-center">
+              <span className="text-2xl font-bold text-[#3b82f6]">NAC</span>
             </div>
             <div>
-              <button className="px-4 py-2 bg-[#2563EB] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors text-sm font-medium">
+              <button className="px-4 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors text-sm font-medium">
                 Upload Logo
               </button>
-              <p className="text-xs text-[#6b7280] mt-2">Recommended: 400x400px, PNG or JPG</p>
+              <p className="text-xs text-gray-500 mt-2">Recommended: 400x400px, PNG or JPG</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Commission Name</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Commission Name</label>
               <input
                 type="text"
                 defaultValue="Nevada Athletic Commission"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Jurisdiction</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Jurisdiction</label>
               <input
                 type="text"
                 defaultValue="State of Nevada"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Address</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Address</label>
               <input
                 type="text"
                 defaultValue="555 E. Washington Ave., Suite 3200"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">City, State ZIP</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">City, State ZIP</label>
               <input
                 type="text"
                 defaultValue="Las Vegas, NV 89101"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Phone</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
               <input
                 type="tel"
                 defaultValue="(702) 486-2575"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
               <input
                 type="email"
                 defaultValue="info@nac.gov"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Website</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Website</label>
               <input
                 type="url"
                 defaultValue="https://boxing.nv.gov"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#374151] mb-1">Executive Director</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">Executive Director</label>
               <input
                 type="text"
                 defaultValue="John Smith"
-                className="w-full px-4 py-2 border border-[#e5e7eb] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+                className="w-full px-4 py-2.5 bg-[#252525] border border-[#2a2a2a] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               />
             </div>
           </div>
-          <div className="mt-6 pt-6 border-t border-[#e5e7eb] flex justify-end">
-            <button className="px-4 py-2 bg-[#2563EB] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors font-medium">
+          <div className="mt-6 pt-6 border-t border-[#2a2a2a] flex justify-end">
+            <button className="px-4 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors font-medium">
               Save Changes
             </button>
           </div>
@@ -137,41 +137,41 @@ export default function CommissionSettingsPage() {
       {activeTab === "team" && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-[#6b7280]">{teamMembers.length} team members</p>
-            <button className="px-4 py-2 bg-[#2563EB] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors text-sm font-medium">
+            <p className="text-sm text-gray-500">{teamMembers.length} team members</p>
+            <button className="px-4 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors text-sm font-medium">
               + Invite Member
             </button>
           </div>
-          <div className="bg-white rounded-xl border border-[#e5e7eb]">
+          <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-[#e5e7eb]">
-                  <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Member</th>
-                  <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Role</th>
-                  <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]">Status</th>
-                  <th className="text-left px-4 py-3 text-sm font-medium text-[#6b7280]"></th>
+                <tr className="border-b border-[#2a2a2a] bg-[#151515]">
+                  <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Member</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Role</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-gray-500">Status</th>
+                  <th className="text-left px-4 py-3 text-sm font-medium text-gray-500"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#e5e7eb]">
+              <tbody className="divide-y divide-[#2a2a2a]">
                 {teamMembers.map((member) => (
-                  <tr key={member.id} className="hover:bg-[#f9fafb]">
+                  <tr key={member.id} className="hover:bg-[#252525] transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#2563EB]/10 rounded-full flex items-center justify-center">
-                          <span className="text-[#2563EB] font-medium">
+                        <div className="w-10 h-10 bg-[#3b82f6]/20 rounded-full flex items-center justify-center">
+                          <span className="text-[#3b82f6] font-medium text-sm">
                             {member.name.split(" ").map((n) => n[0]).join("")}
                           </span>
                         </div>
                         <div>
-                          <p className="font-medium text-[#111827]">{member.name}</p>
-                          <p className="text-xs text-[#6b7280]">{member.email}</p>
+                          <p className="font-medium text-white">{member.name}</p>
+                          <p className="text-xs text-gray-500">{member.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-4 py-3">
                       <select
                         defaultValue={member.role}
-                        className="px-3 py-1 border border-[#e5e7eb] rounded-lg text-sm bg-white"
+                        className="px-3 py-1 bg-[#252525] border border-[#2a2a2a] rounded-lg text-sm text-white"
                       >
                         <option>Administrator</option>
                         <option>Document Reviewer</option>
@@ -183,8 +183,8 @@ export default function CommissionSettingsPage() {
                       <span
                         className={`px-2 py-1 rounded-full text-xs font-medium ${
                           member.status === "active"
-                            ? "bg-[#dcfce7] text-[#166534]"
-                            : "bg-[#fef3c7] text-[#92400e]"
+                            ? "bg-[#22c55e]/20 text-[#22c55e]"
+                            : "bg-[#f59e0b]/20 text-[#f59e0b]"
                         }`}
                       >
                         {member.status}
@@ -203,9 +203,9 @@ export default function CommissionSettingsPage() {
 
       {/* Rulesets Tab */}
       {activeTab === "rulesets" && (
-        <div className="bg-white rounded-xl border border-[#e5e7eb] p-6">
-          <h3 className="font-semibold text-[#111827] mb-4">Default Document Requirements</h3>
-          <p className="text-sm text-[#6b7280] mb-6">
+        <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] p-6">
+          <h3 className="font-semibold text-white mb-4">Default Document Requirements</h3>
+          <p className="text-sm text-gray-500 mb-6">
             Configure the default medical requirements for each discipline. These can be overridden on a per-event basis.
           </p>
           <div className="space-y-6">
@@ -231,23 +231,23 @@ export default function CommissionSettingsPage() {
                 ],
               },
             ].map((disc) => (
-              <div key={disc.discipline} className="border border-[#e5e7eb] rounded-lg p-4">
-                <h4 className="font-medium text-[#111827] mb-3">{disc.discipline}</h4>
+              <div key={disc.discipline} className="border border-[#2a2a2a] rounded-lg p-4">
+                <h4 className="font-medium text-white mb-3">{disc.discipline}</h4>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-[#e5e7eb]">
-                      <th className="text-left py-2 text-[#6b7280]">Requirement</th>
-                      <th className="text-left py-2 text-[#6b7280]">Validity Period</th>
-                      <th className="text-left py-2 text-[#6b7280]">Required</th>
+                    <tr className="border-b border-[#2a2a2a]">
+                      <th className="text-left py-2 text-gray-500">Requirement</th>
+                      <th className="text-left py-2 text-gray-500">Validity Period</th>
+                      <th className="text-left py-2 text-gray-500">Required</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#e5e7eb]">
+                  <tbody className="divide-y divide-[#2a2a2a]">
                     {disc.requirements.map((req) => (
                       <tr key={req.name}>
-                        <td className="py-2">{req.name}</td>
-                        <td className="py-2">{req.validity}</td>
+                        <td className="py-2 text-gray-300">{req.name}</td>
+                        <td className="py-2 text-gray-400">{req.validity}</td>
                         <td className="py-2">
-                          <input type="checkbox" defaultChecked={req.required} className="rounded" />
+                          <input type="checkbox" defaultChecked={req.required} className="rounded bg-[#252525] border-[#2a2a2a]" />
                         </td>
                       </tr>
                     ))}
@@ -256,8 +256,8 @@ export default function CommissionSettingsPage() {
               </div>
             ))}
           </div>
-          <div className="mt-6 pt-6 border-t border-[#e5e7eb] flex justify-end">
-            <button className="px-4 py-2 bg-[#2563EB] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors font-medium">
+          <div className="mt-6 pt-6 border-t border-[#2a2a2a] flex justify-end">
+            <button className="px-4 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors font-medium">
               Save Rulesets
             </button>
           </div>
@@ -266,8 +266,8 @@ export default function CommissionSettingsPage() {
 
       {/* Notifications Tab */}
       {activeTab === "notifications" && (
-        <div className="bg-white rounded-xl border border-[#e5e7eb] p-6">
-          <h3 className="font-semibold text-[#111827] mb-6">Notification Preferences</h3>
+        <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] p-6">
+          <h3 className="font-semibold text-white mb-6">Notification Preferences</h3>
           <div className="space-y-6">
             {[
               { id: "event_submitted", label: "Event submitted for approval", description: "When a promotion submits a new event" },
@@ -278,24 +278,24 @@ export default function CommissionSettingsPage() {
             ].map((pref) => (
               <div key={pref.id} className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-[#111827]">{pref.label}</p>
-                  <p className="text-sm text-[#6b7280]">{pref.description}</p>
+                  <p className="font-medium text-white">{pref.label}</p>
+                  <p className="text-sm text-gray-500">{pref.description}</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" defaultChecked className="rounded" />
+                  <label className="flex items-center gap-2 text-sm text-gray-400">
+                    <input type="checkbox" defaultChecked className="rounded bg-[#252525] border-[#2a2a2a]" />
                     Email
                   </label>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" defaultChecked className="rounded" />
+                  <label className="flex items-center gap-2 text-sm text-gray-400">
+                    <input type="checkbox" defaultChecked className="rounded bg-[#252525] border-[#2a2a2a]" />
                     Dashboard
                   </label>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-6 pt-6 border-t border-[#e5e7eb] flex justify-end">
-            <button className="px-4 py-2 bg-[#2563EB] text-white rounded-lg hover:bg-[#1d4ed8] transition-colors font-medium">
+          <div className="mt-6 pt-6 border-t border-[#2a2a2a] flex justify-end">
+            <button className="px-4 py-2 bg-[#3b82f6] text-white rounded-lg hover:bg-[#2563eb] transition-colors font-medium">
               Save Preferences
             </button>
           </div>

@@ -48,9 +48,9 @@ const mockApprovals = [
 
 function ConfidenceBadge({ confidence }: { confidence: number }) {
   const getColor = () => {
-    if (confidence >= 90) return "bg-green-100 text-green-800";
-    if (confidence >= 75) return "bg-yellow-100 text-yellow-800";
-    return "bg-red-100 text-red-800";
+    if (confidence >= 90) return "bg-[#22c55e]/20 text-[#22c55e]";
+    if (confidence >= 75) return "bg-[#f59e0b]/20 text-[#f59e0b]";
+    return "bg-[#ef4444]/20 text-[#ef4444]";
   };
 
   return (
@@ -83,9 +83,9 @@ export default function ApprovalsPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-[#111827]">Document Approvals</h1>
+        <h1 className="text-2xl font-bold text-white">Document Approvals</h1>
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+          <span className="px-3 py-1 bg-[#f59e0b]/20 text-[#f59e0b] rounded-full text-sm font-medium">
             {pendingApprovals.length} pending
           </span>
         </div>
@@ -93,26 +93,26 @@ export default function ApprovalsPage() {
 
       <div className="grid grid-cols-2 gap-6">
         {/* Pending List */}
-        <div className="bg-white rounded-xl border border-[#e5e7eb]">
-          <div className="p-4 border-b border-[#e5e7eb]">
-            <h2 className="font-semibold text-[#111827]">Pending Review</h2>
+        <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a]">
+          <div className="p-4 border-b border-[#2a2a2a]">
+            <h2 className="font-semibold text-white">Pending Review</h2>
           </div>
-          <div className="divide-y divide-[#e5e7eb]">
+          <div className="divide-y divide-[#2a2a2a]">
             {pendingApprovals.map((approval) => (
               <button
                 key={approval.id}
                 onClick={() => setSelectedApproval(approval)}
-                className={`w-full p-4 text-left hover:bg-[#f9fafb] transition-colors ${
-                  selectedApproval?.id === approval.id ? "bg-[#ebf5ff]" : ""
+                className={`w-full p-4 text-left hover:bg-[#252525] transition-colors ${
+                  selectedApproval?.id === approval.id ? "bg-[#3b82f6]/10" : ""
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium text-[#111827]">
+                  <span className="font-medium text-white">
                     {approval.fighter.name}
                   </span>
                   <ConfidenceBadge confidence={approval.confidence} />
                 </div>
-                <p className="text-sm text-[#6b7280]">
+                <p className="text-sm text-gray-500">
                   {approval.documentType} • {approval.uploadedAt}
                 </p>
                 {approval.flags && (
@@ -120,7 +120,7 @@ export default function ApprovalsPage() {
                     {approval.flags.map((flag, i) => (
                       <span
                         key={i}
-                        className="text-xs text-orange-600 bg-orange-50 px-2 py-1 rounded"
+                        className="text-xs text-[#f59e0b] bg-[#f59e0b]/10 px-2 py-1 rounded"
                       >
                         ⚠️ {flag}
                       </span>
@@ -131,32 +131,32 @@ export default function ApprovalsPage() {
             ))}
           </div>
           {pendingApprovals.length === 0 && (
-            <div className="p-8 text-center text-[#6b7280]">
+            <div className="p-8 text-center text-gray-500">
               No pending approvals
             </div>
           )}
         </div>
 
         {/* Detail Panel */}
-        <div className="bg-white rounded-xl border border-[#e5e7eb]">
+        <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a]">
           {selectedApproval ? (
             <>
-              <div className="p-4 border-b border-[#e5e7eb]">
-                <h2 className="font-semibold text-[#111827]">Document Review</h2>
+              <div className="p-4 border-b border-[#2a2a2a]">
+                <h2 className="font-semibold text-white">Document Review</h2>
               </div>
               <div className="p-4 space-y-4">
                 {/* Fighter Info */}
-                <div className="flex items-center gap-3 p-3 bg-[#f9fafb] rounded-lg">
-                  <div className="w-12 h-12 bg-[#e5e7eb] rounded-full flex items-center justify-center">
-                    <span className="font-medium text-[#6b7280]">
+                <div className="flex items-center gap-3 p-3 bg-[#252525] rounded-lg">
+                  <div className="w-12 h-12 bg-[#3a3a3a] rounded-full flex items-center justify-center">
+                    <span className="font-medium text-gray-400">
                       {selectedApproval.fighter.name.split(" ").map((n) => n[0]).join("")}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium text-[#111827]">
+                    <p className="font-medium text-white">
                       {selectedApproval.fighter.name}
                     </p>
-                    <p className="text-sm text-[#6b7280]">
+                    <p className="text-sm text-gray-500">
                       {selectedApproval.fighter.id} • {selectedApproval.fighter.record}
                     </p>
                   </div>
@@ -164,8 +164,8 @@ export default function ApprovalsPage() {
 
                 {/* Document Type */}
                 <div>
-                  <p className="text-sm text-[#6b7280] mb-1">Document Type</p>
-                  <p className="font-medium text-[#111827]">
+                  <p className="text-sm text-gray-500 mb-1">Document Type</p>
+                  <p className="font-medium text-white">
                     {selectedApproval.documentType}
                   </p>
                 </div>
@@ -173,25 +173,25 @@ export default function ApprovalsPage() {
                 {/* AI Extracted Data */}
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm text-[#6b7280]">AI-Extracted Data</p>
+                    <p className="text-sm text-gray-500">AI-Extracted Data</p>
                     <ConfidenceBadge confidence={selectedApproval.confidence} />
                   </div>
-                  <div className="bg-[#f9fafb] rounded-lg p-3 space-y-2">
+                  <div className="bg-[#252525] rounded-lg p-3 space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-[#6b7280]">Test Date:</span>
-                      <span className="text-sm font-medium text-[#111827]">
+                      <span className="text-sm text-gray-500">Test Date:</span>
+                      <span className="text-sm font-medium text-white">
                         {selectedApproval.extractedData.testDate}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-[#6b7280]">Provider:</span>
-                      <span className="text-sm font-medium text-[#111827]">
+                      <span className="text-sm text-gray-500">Provider:</span>
+                      <span className="text-sm font-medium text-white">
                         {selectedApproval.extractedData.provider}
                       </span>
                     </div>
                     <div>
-                      <span className="text-sm text-[#6b7280]">Results:</span>
-                      <p className="text-sm font-medium text-[#111827] mt-1">
+                      <span className="text-sm text-gray-500">Results:</span>
+                      <p className="text-sm font-medium text-white mt-1">
                         {selectedApproval.extractedData.results}
                       </p>
                     </div>
@@ -200,9 +200,9 @@ export default function ApprovalsPage() {
 
                 {/* Document Preview Placeholder */}
                 <div>
-                  <p className="text-sm text-[#6b7280] mb-2">Document Preview</p>
-                  <div className="h-48 bg-[#f9fafb] rounded-lg border-2 border-dashed border-[#d1d5db] flex items-center justify-center">
-                    <span className="text-[#6b7280]">📄 Document Preview</span>
+                  <p className="text-sm text-gray-500 mb-2">Document Preview</p>
+                  <div className="h-48 bg-[#252525] rounded-lg border-2 border-dashed border-[#3a3a3a] flex items-center justify-center">
+                    <span className="text-gray-500">📄 Document Preview</span>
                   </div>
                 </div>
 
@@ -210,7 +210,7 @@ export default function ApprovalsPage() {
                 <div className="flex gap-3 pt-4">
                   <button
                     onClick={() => handleApprove(selectedApproval.id)}
-                    className="flex-1 px-4 py-3 bg-[#10b981] text-white font-medium rounded-lg hover:bg-[#059669] transition-colors"
+                    className="flex-1 px-4 py-3 bg-[#22c55e] text-white font-medium rounded-lg hover:bg-[#16a34a] transition-colors"
                   >
                     ✓ Approve
                   </button>
@@ -224,7 +224,7 @@ export default function ApprovalsPage() {
               </div>
             </>
           ) : (
-            <div className="p-8 text-center text-[#6b7280]">
+            <div className="p-8 text-center text-gray-500">
               Select a document to review
             </div>
           )}

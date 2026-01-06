@@ -1,6 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
 
 export interface JwtPayload {
   sub: string;
@@ -11,26 +9,14 @@ export interface JwtPayload {
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private jwtService: JwtService,
-    private configService: ConfigService,
-  ) {}
+  constructor() {}
 
-  async generateToken(payload: JwtPayload): Promise<string> {
-    return this.jwtService.sign(payload);
-  }
+  // Auth0 handles token generation and validation
+  // This service is a placeholder for future auth-related business logic
 
-  async validateToken(token: string): Promise<JwtPayload> {
-    try {
-      return this.jwtService.verify(token);
-    } catch (error) {
-      throw new UnauthorizedException('Invalid token');
-    }
-  }
-
-  async refreshToken(token: string): Promise<string> {
-    const payload = await this.validateToken(token);
-    const { iat, exp, ...rest } = payload as any;
-    return this.generateToken(rest);
+  async refreshToken(_token: string): Promise<string> {
+    // In a real Auth0 setup, you would use Auth0's refresh token flow
+    // This is a placeholder implementation
+    throw new Error('Token refresh should be handled by Auth0');
   }
 }
