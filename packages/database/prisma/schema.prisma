@@ -1,0 +1,385 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== ENUMS ====================
+
+enum UserRole {
+  fighter
+  gym
+  promotion
+  commission
+  sponsor
+  admin
+}
+
+enum VerificationStatus {
+  pending
+  verified
+  rejected
+}
+
+enum EligibilityStatus {
+  eligible
+  conditional
+  incomplete
+  expired
+  under_review
+  suspended
+}
+
+enum DocumentType {
+  blood_test
+  physical
+  eye_exam
+  mri
+  ekg
+  drug_test
+  license
+  insurance
+  other
+}
+
+enum DocumentStatus {
+  pending
+  processing
+  verified
+  rejected
+  expired
+}
+
+enum OrganizationType {
+  gym
+  promotion
+  commission
+}
+
+enum EventStatus {
+  draft
+  submitted
+  approved
+  completed
+  cancelled
+}
+
+enum BoutStatus {
+  pending
+  signed
+  approved
+  completed
+  cancelled
+}
+
+// ==================== MODELS ====================
+
+model User {
+  id                 String             @id @default(uuid())
+  email              String             @unique
+  phone              String?
+  passwordHash       String?
+  role               UserRole           @default(fighter)
+  auth0Id            String?            @unique
+  emailVerified      Boolean            @default(false)
+  mfaEnabled         Boolean            @default(false)
+  lastLoginAt        DateTime?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  fighter            Fighter?
+  ownedOrganizations Organization[]     @relation("OrganizationOwner")
+  organizationMemberships OrganizationMember[]
+  auditLogs          AuditLog[]
+
+  @@index([email])
+  @@index([auth0Id])
+}
+
+model Fighter {
+  id                 String             @id @default(uuid())
+  combatId           String             @unique
+  userId             String             @unique
+  name               String
+  dateOfBirth        DateTime
+  countryOfBirth     String
+  currentResidence   String
+  weightClass        String
+  disciplines        String[]
+  record             String             @default("0-0")
+  bio                String?
+  profileImageUrl    String?
+
+  verificationStatus VerificationStatus @default(pending)
+  eligibilityStatus  EligibilityStatus  @default(incomplete)
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documents          Document[]
+  licenses           License[]
+  boutsAsFighterA    Bout[]             @relation("FighterA")
+  boutsAsFighterB    Bout[]             @relation("FighterB")
+  rosterMemberships  RosterMember[]
+  eligibilityChecks  EligibilityCheck[]
+  consentRecords     ConsentRecord[]
+
+  @@index([combatId])
+  @@index([name])
+  @@index([eligibilityStatus])
+}
+
+model Document {
+  id                 String             @id @default(uuid())
+  fighterId          String
+  type               DocumentType
+  fileName           String
+  fileKey            String             // S3 key
+  fileSize           Int
+  mimeType           String
+
+  status             DocumentStatus     @default(pending)
+  extractedData      Json?
+  aiConfidence       Float?
+  issueDate          DateTime?
+  expirationDate     DateTime?
+  provider           String?
+
+  reviewedBy         String?
+  reviewedAt         DateTime?
+  reviewNotes        String?
+
+  version            Int                @default(1)
+  previousVersionId  String?
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  fighter            Fighter            @relation(fields: [fighterId], references: [id], onDelete: Cascade)
+  previousVersion    Document?          @relation("DocumentVersions", fields: [previousVersionId], references: [id])
+  newerVersions      Document[]         @relation("DocumentVersions")
+
+  @@index([fighterId])
+  @@index([type])
+  @@index([status])
+  @@index([expirationDate])
+}
+
+model License {
+  id                 String             @id @default(uuid())
+  fighterId          String
+  jurisdiction       String
+  licenseNumber      String?
+  discipline         String
+  issueDate          DateTime
+  expirationDate     DateTime
+  status             String             @default("active")
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  fighter            Fighter            @relation(fields: [fighterId], references: [id], onDelete: Cascade)
+
+  @@unique([fighterId, jurisdiction, discipline])
+  @@index([jurisdiction])
+}
+
+model Organization {
+  id                 String             @id @default(uuid())
+  type               OrganizationType
+  name               String
+  description        String?
+  logoUrl            String?
+  location           String
+  jurisdiction       String?
+  website            String?
+
+  verificationStatus VerificationStatus @default(pending)
+  ownerId            String
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  owner              User               @relation("OrganizationOwner", fields: [ownerId], references: [id])
+  members            OrganizationMember[]
+  roster             RosterMember[]
+  eventsAsPromotion  Event[]            @relation("PromotionEvents")
+  eventsAsCommission Event[]            @relation("CommissionEvents")
+  rulesets           Ruleset[]
+
+  @@index([type])
+  @@index([name])
+}
+
+model OrganizationMember {
+  id                 String             @id @default(uuid())
+  organizationId     String
+  userId             String
+  role               String             @default("member")
+
+  createdAt          DateTime           @default(now())
+
+  // Relations
+  organization       Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+}
+
+model RosterMember {
+  id                 String             @id @default(uuid())
+  organizationId     String
+  fighterId          String
+  status             String             @default("active")
+  contractedUntil    DateTime?
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  organization       Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  fighter            Fighter            @relation(fields: [fighterId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, fighterId])
+}
+
+model Event {
+  id                 String             @id @default(uuid())
+  promotionId        String
+  commissionId       String?
+  name               String
+  eventName          String
+  date               DateTime
+  location           String
+  venue              String?
+  type               String
+
+  status             EventStatus        @default(draft)
+  submittedAt        DateTime?
+  approvedAt         DateTime?
+  approvedBy         String?
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  promotion          Organization       @relation("PromotionEvents", fields: [promotionId], references: [id])
+  commission         Organization?      @relation("CommissionEvents", fields: [commissionId], references: [id])
+  bouts              Bout[]
+
+  @@index([date])
+  @@index([status])
+}
+
+model Bout {
+  id                 String             @id @default(uuid())
+  eventId            String
+  fighterAId         String
+  fighterBId         String
+  weightClass        String
+  rounds             Int                @default(3)
+  position           Int
+
+  status             BoutStatus         @default(pending)
+  fighterASignedAt   DateTime?
+  fighterBSignedAt   DateTime?
+
+  resultWinnerId     String?
+  resultMethod       String?
+  resultRound        Int?
+  resultTime         String?
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  event              Event              @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  fighterA           Fighter            @relation("FighterA", fields: [fighterAId], references: [id])
+  fighterB           Fighter            @relation("FighterB", fields: [fighterBId], references: [id])
+
+  @@index([eventId])
+}
+
+model Ruleset {
+  id                 String             @id @default(uuid())
+  commissionId       String
+  discipline         String
+  requirements       Json
+  version            Int                @default(1)
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  commission         Organization       @relation(fields: [commissionId], references: [id], onDelete: Cascade)
+
+  @@unique([commissionId, discipline])
+}
+
+model EligibilityCheck {
+  id                 String             @id @default(uuid())
+  fighterId          String
+  commissionId       String
+  discipline         String
+  status             EligibilityStatus
+  requirements       Json
+
+  overrideBy         String?
+  overrideReason     String?
+
+  checkedAt          DateTime           @default(now())
+
+  // Relations
+  fighter            Fighter            @relation(fields: [fighterId], references: [id], onDelete: Cascade)
+
+  @@index([fighterId])
+  @@index([checkedAt])
+}
+
+model ConsentRecord {
+  id                 String             @id @default(uuid())
+  fighterId          String
+  consentType        String             // data_sharing, medical_access, etc.
+  grantedTo          String             // organization ID or user ID
+  grantedToType      String             // organization, user
+  scope              String[]           // what data is accessible
+  expiresAt          DateTime?
+  revokedAt          DateTime?
+
+  createdAt          DateTime           @default(now())
+
+  // Relations
+  fighter            Fighter            @relation(fields: [fighterId], references: [id], onDelete: Cascade)
+
+  @@index([fighterId])
+  @@index([grantedTo])
+}
+
+model AuditLog {
+  id                 String             @id @default(uuid())
+  userId             String?
+  action             String
+  entityType         String
+  entityId           String
+  changes            Json?
+  ipAddress          String?
+  userAgent          String?
+
+  createdAt          DateTime           @default(now())
+
+  // Relations
+  user               User?              @relation(fields: [userId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([createdAt])
+}
