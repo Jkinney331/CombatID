@@ -17,6 +17,12 @@ export default function Home() {
       {/* Portal Selection */}
       <div className="grid gap-4 w-full max-w-md px-6">
         <Link
+          href="/fighter"
+          className="bg-gradient-to-r from-[#ef4444] to-[#dc2626] text-white px-8 py-4 rounded-xl text-center font-semibold text-lg hover:from-[#dc2626] hover:to-[#b91c1c] transition-all shadow-lg"
+        >
+          Fighter Portal
+        </Link>
+        <Link
           href="/commission"
           className="bg-white text-[#2563EB] px-8 py-4 rounded-xl text-center font-semibold text-lg hover:bg-white/90 transition-colors"
         >
@@ -38,7 +44,7 @@ export default function Home() {
 
       {/* Footer */}
       <p className="text-white/60 text-sm mt-12">
-        Fighter? Download the CombatID app
+        Also available on iOS and Android
       </p>
     </div>
   );
