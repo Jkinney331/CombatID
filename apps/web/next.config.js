@@ -1,20 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Do NOT use standalone output - incompatible with Netlify's serverless
-  // The @netlify/plugin-nextjs handles deployment automatically
-
-  // Trailing slash behavior
+  // Standard build - let Netlify handle it
   trailingSlash: false,
 
-  // Image optimization - use Netlify's image CDN
+  // Use unoptimized images to avoid serverless complexity
   images: {
-    unoptimized: false,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+    unoptimized: true,
   },
 
   // Disable x-powered-by header for security
